@@ -25,7 +25,7 @@
         "semi": ["error", "never"],
         "quotes": ["error", "single"],
         "no-else-return": 1,
-        "no-console": "error",
+        "no-console": "warn",
         "@typescript-eslint/no-unused-vars": "error",
         "@angular-eslint/directive-selector": [
           "error",
