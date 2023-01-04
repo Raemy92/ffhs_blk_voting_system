@@ -7,6 +7,8 @@ import { HomeComponent } from './views/home/home.component'
 import { CoreModule } from './core/core.module'
 import { VoteComponent } from './views/vote/vote.component'
 import { ResultsComponent } from './views/results/results.component'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { MatButtonModule } from '@angular/material/button'
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ResultsComponent } from './views/results/results.component'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
