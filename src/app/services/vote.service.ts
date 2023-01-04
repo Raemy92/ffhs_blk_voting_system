@@ -67,15 +67,46 @@ export class VoteService {
     return Promise.resolve(this.account)
   }
 
+  public async getUserBalance(): Promise<any> {
+    const account = await this.getAccount()
+    console.log('transfer.service :: getUserBalance :: account')
+    console.log(account)
+    return new Promise((resolve, reject) => {
+      window.web3.eth.getBalance(account, function(err: any, balance: any) {
+        console.log('transfer.service :: getUserBalance :: getBalance')
+        console.log(balance)
+        if (!err) {
+          const retVal = {
+            account: account,
+            balance: balance
+          }
+          console.log('transfer.service :: getUserBalance :: getBalance :: retVal')
+          console.log(retVal)
+          resolve(retVal)
+        } else {
+          reject({ account: 'error', balance: 0 })
+        }
+      })
+    }) as Promise<any>
+  }
+
   public async getInitiatives(): Promise<Initiative[]> {
     const contract = require('@truffle/contract')
     const voteContract = contract(tokenAbi)
     let voteInstance: any
+    let initiativesArray: Initiative[] = []
     voteContract.setProvider(this.web3)
     console.log(voteContract)
     return voteContract.deployed().then((instance: any) => {
       voteInstance = instance
-      return voteInstance.initiatives
+      return voteInstance.initiativesCount()
+    }).then((initiativesCount: number) => {
+      for (let i = 0; i < initiativesCount; i++) {
+        voteInstance.initiatives(i).then((initiative: Initiative) => {
+          initiativesArray.push(initiative)
+        })
+      }
+      console.log('LR - ', initiativesArray)
     })
   }
 }
