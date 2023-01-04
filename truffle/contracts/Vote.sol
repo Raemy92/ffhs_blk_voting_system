@@ -1,4 +1,4 @@
-pragma solidity ^0.5.4;
+pragma solidity ^0.8.17;
 
 contract Vote {
 
@@ -18,9 +18,9 @@ contract Vote {
   );
 
   constructor () public {
-    addInitiative("Gegen alles, für nichts!", "Extrem sinnbefreite Initiative, Annahme empfohlen.");
-    addInitiative("Gegen schwarze Schafe in der CH", "Schwarze Schafe sollen bei Annahme sofort weiss gefärbt werden.");
-    addInitiative("Senslerdeutsch als offizielle Landessprache", "Das Senslerdeutsch soll als einzige und offizielle Amtssprache der Schweiz eingeführt werden, hui!");
+    addInitiative("Gegen alles\x2C f\xC3\xBCr nichts\x21", "Extrem sinnbefreite Initiative\x2C Annahme empfohlen\x2E");
+    addInitiative("Gegen schwarze Schafe in der CH", "Schwarze Schafe sollen bei Annahme sofort weiss gef\xC3\xA4rbt werden\x2E");
+    addInitiative("Senslerdeutsch als offizielle Landessprache", "Das Senslerdeutsch soll als einzige und offizielle Amtssprache der Schweiz eingef\xC3\xBChrt werden\x2C hui\x21");
   }
 
   function addInitiative (string memory title, string memory description) private {
