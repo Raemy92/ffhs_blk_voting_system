@@ -19,7 +19,6 @@ export class VoteComponent implements OnInit {
       // TODO: Remove Timeout when figured out why GUI is not updating when BehaviourSubject changes
       setTimeout(() => {
         this.initiatives$.next(data)
-        console.log(data)
       }, 2000)
     })
   }

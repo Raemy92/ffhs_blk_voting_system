@@ -8,8 +8,7 @@ import { CoreModule } from './core/core.module'
 import { VoteComponent } from './views/vote/vote.component'
 import { ResultsComponent } from './views/results/results.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { MatButtonModule } from '@angular/material/button'
-import { InitiativeComponent } from './views/vote/initiative/initiative.component'
+import { SharedModule } from './shared/shared.module'
 
 @NgModule({
   declarations: [
@@ -17,14 +16,13 @@ import { InitiativeComponent } from './views/vote/initiative/initiative.componen
     HomeComponent,
     VoteComponent,
     ResultsComponent,
-    InitiativeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
+    SharedModule,
     BrowserAnimationsModule,
-    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

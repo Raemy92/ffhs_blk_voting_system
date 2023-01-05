@@ -1,1 +1,6 @@
-<p>results works!</p>
+<h1>Results</h1>
+<app-initiative
+  *ngFor="let initiative of (initiatives$ | async)"
+  [initiative]="initiative"
+  [isResult]="true"
+></app-initiative>
