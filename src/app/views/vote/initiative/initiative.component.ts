@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Initiative } from '../../../models/initiative'
+import { VoteService } from '../../../services/vote.service'
 
 @Component({
   selector: 'app-initiative',
@@ -11,8 +12,16 @@ export class InitiativeComponent implements OnInit{
   @Input() isResult: boolean = false
   yesPercent: number = 0
 
+  constructor(private readonly voteService: VoteService) {
+  }
+
   ngOnInit(): void {
-    console.log(this.initiative)
-    //this.yesPercent = (this.voteCountYes / (this.voteCountYes + this.voteCountNo)) * 100
+    if (this.initiative) {
+      this.yesPercent = (this.initiative?.voteCountYes/ (this.initiative?.voteCountYes + this.initiative?.voteCountNo)) * 100
+    }
+  }
+
+  vote(value: boolean) {
+    this.voteService.vote(this.initiative?.id || -1, value)
   }
 }

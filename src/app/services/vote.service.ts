@@ -15,7 +15,6 @@ export class VoteService {
   private readonly web3: any
   private enable: any
   private contracts: any = {}
-  private initiatives: Initiative[] = []
 
   constructor() {
     if (window.ethereum === undefined) {
@@ -96,14 +95,17 @@ export class VoteService {
     const voteContract = contract(tokenAbi)
     let voteInstance: any
     let initiativesArray: Initiative[] = []
+
     voteContract.setProvider(this.web3)
-    console.log(voteContract)
     return voteContract.deployed().then((instance: any) => {
       voteInstance = instance
       return voteInstance.initiativesCount()
     }).then((initiativesCount: number) => {
       for (let i = 1; i <= initiativesCount; i++) {
-        voteInstance.initiatives(i).then((initiative: Initiative) => {
+        voteInstance.initiatives(i).then((initiative: any) => {
+          initiative.voteCountYes = initiative.voteCountYes.words[0]
+          initiative.voteCountNo = initiative.voteCountNo.words[0]
+          initiative.id = initiative.id.words[0]
           initiativesArray.push(initiative)
         })
       }
@@ -111,7 +113,30 @@ export class VoteService {
     })
   }
 
-  public getInitiatives(): Initiative[] {
-    return this.initiatives
+  async vote(initiativeId: number, value: boolean) {
+    const account = await this.getAccount()
+    return new Promise((resolve, reject) => {
+      console.log(tokenAbi)
+      const contract = require('@truffle/contract')
+      const voteContract = contract(tokenAbi)
+
+      voteContract.setProvider(this.web3)
+
+      voteContract.deployed().then((instance: any) => {
+        return instance.vote(
+          initiativeId,
+          value,
+          { from: account }
+        )
+      }).then((status: any) => {
+        if (status) {
+          return resolve({ status: true })
+        }
+      }).catch((error: any) => {
+        console.log(error)
+        return reject('vote.service error')
+      })
+    })
   }
+
 }

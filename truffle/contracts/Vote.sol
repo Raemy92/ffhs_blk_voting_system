@@ -29,7 +29,8 @@ contract Vote {
   }
 
   function vote (uint _initiativeId, bool hasVotedYes) public {
-    require(!voters[msg.sender]);
+    // TODO: Add check if voter has already voted on specific initiative
+    //require(!voters[msg.sender]);
     require(_initiativeId > 0);
     voters[msg.sender] = true;
     if (hasVotedYes == true) {
