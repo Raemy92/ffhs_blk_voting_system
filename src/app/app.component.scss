@@ -11,31 +11,9 @@
   .container {
     position: relative;
     width: 90vw;
-    height: 100%;
+    height: calc(100% - 144px);
     margin-left: auto;
     margin-right: auto;
     padding: 24px 16px;
-  }
-
-  button {
-    color: #ffffff;
-    background-color: #611BBD;
-    border-color: #130269;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    white-space: nowrap;
-    padding: 6px 12px;
-    font-size: 12px;
-    line-height: 1.42857143;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 }
