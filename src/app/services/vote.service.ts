@@ -15,6 +15,7 @@ export class VoteService {
   private readonly web3: any
   private enable: any
   private contracts: any = {}
+  private initiatives: Initiative[] = []
 
   constructor() {
     if (window.ethereum === undefined) {
@@ -90,7 +91,7 @@ export class VoteService {
     }) as Promise<any>
   }
 
-  public async getInitiatives(): Promise<Initiative[]> {
+  public async fetchInitiatives(): Promise<Initiative[]> {
     const contract = require('@truffle/contract')
     const voteContract = contract(tokenAbi)
     let voteInstance: any
@@ -101,12 +102,16 @@ export class VoteService {
       voteInstance = instance
       return voteInstance.initiativesCount()
     }).then((initiativesCount: number) => {
-      for (let i = 0; i < initiativesCount; i++) {
+      for (let i = 1; i <= initiativesCount; i++) {
         voteInstance.initiatives(i).then((initiative: Initiative) => {
           initiativesArray.push(initiative)
         })
       }
-      console.log('LR - ', initiativesArray)
+      return initiativesArray
     })
+  }
+
+  public getInitiatives(): Initiative[] {
+    return this.initiatives
   }
 }

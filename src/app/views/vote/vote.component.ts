@@ -1,17 +1,27 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { VoteService } from '../../services/vote.service'
+import { BehaviorSubject } from 'rxjs'
 import { Initiative } from '../../models/initiative'
 
 @Component({
   selector: 'app-vote',
   templateUrl: './vote.component.html',
-  styleUrls: ['./vote.component.scss']
+  styleUrls: ['./vote.component.scss'],
 })
-export class VoteComponent {
-  private initiatives: Promise<Initiative[]>
+export class VoteComponent implements OnInit {
+  initiatives$ = new BehaviorSubject<Initiative[] | null>(null)
+  test$ = new BehaviorSubject<number>(666)
 
-  constructor(private readonly voteService: VoteService) {
-    this.initiatives = this.voteService.getInitiatives()
-    console.log(this.initiatives)
+  constructor(private readonly voteService: VoteService) {}
+
+  ngOnInit(): void {
+    this.voteService.fetchInitiatives().then(data => {
+
+      // TODO: Remove Timeout when figured out why GUI is not updating when BehaviourSubject changes,
+      setTimeout(() => {
+        this.initiatives$.next(data)
+        console.log(data)
+      }, 2000)
+    })
   }
 }
