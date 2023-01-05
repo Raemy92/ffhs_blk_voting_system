@@ -10,14 +10,13 @@ import { Initiative } from '../../models/initiative'
 })
 export class VoteComponent implements OnInit {
   initiatives$ = new BehaviorSubject<Initiative[] | null>(null)
-  test$ = new BehaviorSubject<number>(666)
 
   constructor(private readonly voteService: VoteService) {}
 
   ngOnInit(): void {
     this.voteService.fetchInitiatives().then(data => {
 
-      // TODO: Remove Timeout when figured out why GUI is not updating when BehaviourSubject changes,
+      // TODO: Remove Timeout when figured out why GUI is not updating when BehaviourSubject changes
       setTimeout(() => {
         this.initiatives$.next(data)
         console.log(data)

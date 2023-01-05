@@ -9,13 +9,15 @@ import { VoteComponent } from './views/vote/vote.component'
 import { ResultsComponent } from './views/results/results.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatButtonModule } from '@angular/material/button'
+import { InitiativeComponent } from './views/vote/initiative/initiative.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     VoteComponent,
-    ResultsComponent
+    ResultsComponent,
+    InitiativeComponent
   ],
   imports: [
     BrowserModule,

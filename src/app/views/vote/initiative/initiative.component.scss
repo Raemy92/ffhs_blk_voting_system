@@ -1,0 +1,31 @@
+.initiative-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 24px;
+  border: 2px solid rgba(63, 81, 181, 1);
+  background-color: rgba(63, 81, 181, 0.3);
+
+  .title {
+    font-size: 16px;
+    font-weight: 700;
+    padding-right: 16px;
+    width: 25%;
+  }
+
+  .description {
+    padding-right: 16px;
+    width: 50%;
+  }
+
+  .votes {
+    padding-right: 16px;
+    width: 10%;
+  }
+
+  .voteActions button:last-child{
+    margin-left: 16px;
+  }
+}

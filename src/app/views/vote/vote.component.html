@@ -1,7 +1,6 @@
-<p>Votes</p>
-------------
-{{ (initiatives$ | async)?.length }}
-<p *ngFor="let initiative of (initiatives$ | async)">{{ initiative._id }}, {{ initiative.title }}</p>
-------------
+<h1>Votes</h1>
 
-<p>{{ (test$ | async) }}</p>
+<app-initiative
+  *ngFor="let initiative of (initiatives$ | async)"
+  [initiative]="initiative"
+></app-initiative>
