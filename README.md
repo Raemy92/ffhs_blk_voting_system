@@ -2,26 +2,43 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
-## Development server
+## Prerequisites
+1. Install Ganache (https://trufflesuite.com/ganache/)
+   1. Create a new Ethereum workspace
+      1. Name: be creative :)
+      2. Hostname: Choose your localhost (127.0.0.1)
+      3. Port: 7545
+      4. Others can be left with default values
+   2. There should be some test accounts now
+2. Install MetaMask extension for your Browser (https://metamask.io)
+   1. click on import wallet
+   2. copy your 12-word MNEMONIC from Ganache and insert them in Metamask
+   3. Choose your password and click "import"
+   4. Open Metamask extension and open the networks-dropdown
+   5. click on "add network" -> manual
+      1. name: choose something
+      2. RPC-URL: http://127.0.0.1:7545
+      3. Chain ID: enter something, it will tell you the correct ID to enter
+      4. Currency symbol: ETH
+   6. You should now see your first Account with the same amount of ETH as in Ganache.
+3. git clone this project
+4. Install Node (https://nodejs.org/en/) and npm if not already installed on your computer 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Installation
+This project runs on Node version 16. Use Node Version Manager (https://github.com/nvm-sh/nvm) to change the version
+``nvm install 16.13.2 && nvm use 16.13.2``
 
-## Code scaffolding
+cd inside the cloned Repository and run ``npm install`` to install all the dependencies.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run ``npm run start --open`` to start the application. You find further information on the home-page.
 
-## Build
+## Troubleshooting
+If there are some problems with the contracts, check if the ``/truffle/build/contracts`` folder is not empty.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Try to recompile the contracts:
+1. ``cd truffle``
+2. ``truffle compile``
+3. ``truffle migrate --network development``
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Contact
+laurent.raemy@students.ffhs.ch
