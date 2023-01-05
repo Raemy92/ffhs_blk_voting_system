@@ -1,7 +1,10 @@
 <div class="initiative-container">
   <span class="title">{{ initiative?.title }}</span>
   <span class="description">{{ initiative?.description }}</span>
-  <span class="votes" *ngIf="isResult">{{ yesPercent }}%</span>
+  <span class="votes" *ngIf="isResult">
+    Yes: {{ initiative?.voteCountYes }} ({{ yesPercent }}%)<br>
+    No: {{ initiative?.voteCountNo }} ({{ (100 - yesPercent).toFixed(2) }}%)
+  </span>
   <span class="voteActions" *ngIf="!isResult">
     <button
       mat-flat-button
