@@ -23,11 +23,13 @@ The project was created as part of a term paper in the module "Blockchain" at th
    5. click on "add network" -> manual
       1. name: choose something
       2. RPC-URL: http://127.0.0.1:7545
-      3. Chain ID: enter something, it will tell you the correct ID to enter
+      3. Chain ID: 1337
       4. Currency symbol: ETH
    6. You should now see your first Account with the same amount of ETH as in Ganache.
 3. git clone this project
-4. Install Node (https://nodejs.org/en/) and npm if not already installed on your computer 
+4. Open Ganache, Go to Settings->Workspace and click on Add Project. Import the truffle-config.js, save and restart the network.
+5. In ganache, go to Contracts and look if the Vote Contract is deployed. If this is not the case, fist do the Install section and after that, run the commands in the Troubleshoot section.
+6. Install Node (https://nodejs.org/en/) and npm if not already installed on your computer 
 
 ## Installation
 This project runs on Node version 16. Use Node Version Manager (https://github.com/nvm-sh/nvm) to change the version
@@ -39,11 +41,14 @@ Run ``npm run start --open`` to start the application. You find further informat
 
 ## Troubleshooting
 If there are some problems with the contracts, check if the ``/truffle/build/contracts`` folder is not empty.
+You can also look into Ganache/Contracts and see if there is a Contract deployed.
 
 Try to recompile the contracts:
 1. ``cd truffle``
 2. ``truffle compile``
 3. ``truffle migrate --network development``
+
+Sometimes there is a problem with installing truffle, if you don't have the truffle commands, just try to install it globally with ``npm install -g truffle``
 
 ## Kudos:
 - https://github.com/IamLucif3r/VoteChain
