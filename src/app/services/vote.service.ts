@@ -17,7 +17,7 @@ export class VoteService {
 
   constructor() {
     if (window.ethereum === undefined) {
-      alert('Please install MetaMask')
+      alert('Please install or activate MetaMask')
     } else {
       if (typeof window.web3 !== 'undefined') {
         this.web3 = window.web3.currentProvider
@@ -45,11 +45,11 @@ export class VoteService {
             this.account = retAccount[0]
             resolve(this.account)
           } else {
-            alert('transfer.service :: getAccount :: no accounts found.')
+            alert('No valid accounts found.')
             reject('No accounts found.')
           }
           if (err) {
-            alert('transfer.service :: getAccount :: error retrieving account')
+            alert('Error retrieving account')
             reject('Error retrieving account')
           }
         })
@@ -69,6 +69,7 @@ export class VoteService {
           }
           resolve(retVal)
         } else {
+          alert('Error getting account balance.')
           reject({ account: 'error', balance: 0 })
         }
       })
@@ -81,21 +82,26 @@ export class VoteService {
     let voteInstance: any
     let initiativesArray: Initiative[] = []
 
-    voteContract.setProvider(this.web3)
-    return voteContract.deployed().then((instance: any) => {
-      voteInstance = instance
-      return voteInstance.initiativesCount()
-    }).then((initiativesCount: number) => {
-      for (let i = 1; i <= initiativesCount; i++) {
-        voteInstance.initiatives(i).then((initiative: any) => {
-          initiative.voteCountYes = initiative.voteCountYes.words[0]
-          initiative.voteCountNo = initiative.voteCountNo.words[0]
-          initiative.id = initiative.id.words[0]
-          initiativesArray.push(initiative)
-        })
-      }
-      return initiativesArray
-    })
+    try {
+      voteContract.setProvider(this.web3)
+      return voteContract.deployed().then((instance: any) => {
+        voteInstance = instance
+        return voteInstance.initiativesCount()
+      }).then((initiativesCount: number) => {
+        for (let i = 1; i <= initiativesCount; i++) {
+          voteInstance.initiatives(i).then((initiative: any) => {
+            initiative.voteCountYes = initiative.voteCountYes.words[0]
+            initiative.voteCountNo = initiative.voteCountNo.words[0]
+            initiative.id = initiative.id.words[0]
+            initiativesArray.push(initiative)
+          })
+        }
+        return initiativesArray
+      })
+    } catch (error) {
+      alert(`Error setting provider: ${error}`)
+      return []
+    }
   }
 
   async vote(initiativeId: number, value: boolean) {
@@ -104,7 +110,11 @@ export class VoteService {
       const contract = require('@truffle/contract')
       const voteContract = contract(tokenAbi)
 
-      voteContract.setProvider(this.web3)
+      try {
+        voteContract.setProvider(this.web3)
+      } catch (error) {
+        alert(`Error setting provider: ${error}`)
+      }
 
       voteContract.deployed().then((instance: any) => {
         return instance.vote(
