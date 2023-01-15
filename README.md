@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 
 ## Description
-This project serves as a proof-of-concept for a e-voting system based on the Ethereum blockchain. It has very basic function, no security or whatsoever but it shows that the possibility to create a secure, transparent and anonymoous e-voting platform, exists.
+This project serves as a proof-of-concept for a e-voting system based on the Ethereum blockchain. It has very basic function, no security or whatsoever but it shows that the possibility to create a secure, transparent and anonymous e-voting platform, exists.
 
 The project was created as part of a term paper in the module "Blockchain" at the FFHS in the B.Sc. Computer Science program. 
 
